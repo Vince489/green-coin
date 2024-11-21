@@ -20,15 +20,14 @@ class Account {
       throw new Error('Account must be initialized with a positive balance.');
     }
 
-    // Create a new Account instance
     const newAccount = new Account(publicKey, privateKey, initialBalance);
 
     // Record the initial funding as a credit transaction
     const transaction = new Transaction('credit', initialBalance, publicKey);
+    transaction.sign(privateKey);  // Sign the transaction
     newAccount.history.addTransaction(transaction);
 
-    console.log(`Account for ${publicKey} created.`);
-    console.log(`Initial funding of ${initialBalance} credited to ${publicKey} New balance: ${initialBalance}`);
+    console.log(`Account for ${publicKey} created with balance: ${initialBalance}`);
     return newAccount;
   }
 
@@ -40,6 +39,7 @@ class Account {
     }
     this.balance += amount;
     const transaction = new Transaction('credit', amount, this.publicKey);
+    transaction.sign(this.keypair.privateKey);  // Sign the transaction
     this.history.addTransaction(transaction);
     console.log(`Credited ${amount} to ${this.publicKey}. New balance: ${this.balance}`);
   }
@@ -53,6 +53,7 @@ class Account {
     if (this.balance >= amount) {
       this.balance -= amount;
       const transaction = new Transaction('debit', amount, this.publicKey);
+      transaction.sign(this.keypair.privateKey);  // Sign the transaction
       this.history.addTransaction(transaction);
       console.log(`Debited ${amount} from ${this.publicKey}. New balance: ${this.balance}`);
     } else {
@@ -70,12 +71,14 @@ class Account {
       this.balance -= amount;
       recipientAccount.balance += amount;
       
-      // Create a transaction for sender
+      // Create and sign a transaction for sender
       const senderTransaction = new Transaction('debit', amount, this.publicKey, recipientAccount.publicKey);
+      senderTransaction.sign(this.keypair.privateKey);  // Sign the transaction
       this.history.addTransaction(senderTransaction);
 
-      // Create a transaction for receiver
+      // Create and sign a transaction for receiver
       const receiverTransaction = new Transaction('credit', amount, recipientAccount.publicKey, this.publicKey);
+      receiverTransaction.sign(recipientAccount.keypair.privateKey);  // Sign the transaction
       recipientAccount.history.addTransaction(receiverTransaction);
 
       console.log(`Transferred ${amount} from ${this.publicKey} to ${recipientAccount.publicKey}`);
