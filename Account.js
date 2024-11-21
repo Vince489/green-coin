@@ -1,6 +1,5 @@
 const Keypair = require('./Keypair');
 const Transaction = require('./Transaction');
-const TransactionHistory = require('./TransactionHistory');
 
 class Account {
   constructor(publicKey, privateKey, initialBalance) {
@@ -101,24 +100,24 @@ class Account {
 
 // Example usage
 
-// Simulate creating a Keypair
-const keypair = Keypair.generate();
+// // Simulate creating a Keypair
+// const keypair = Keypair.generate();
 
-// Create account using public and private keys from the Keypair with a positive initial balance
-try {
-  const account = Account.createAccount(keypair.keypair.publicKey, keypair.keypair.privateKey, 1000);
+// // Create account using public and private keys from the Keypair with a positive initial balance
+// try {
+//   const account = Account.createAccount(keypair.keypair.publicKey, keypair.keypair.privateKey, 1000);
 
-  // Credit some amount to the account
-  account.credit(500);
+//   // Credit some amount to the account
+//   account.credit(500);
 
-  // Debit some amount from the account
-  account.debit(200);
+//   // Debit some amount from the account
+//   account.debit(200);
 
-  // View balance and transaction history
-  account.viewBalance();
-  account.viewHistory();
-} catch (error) {
-  console.error(error.message);
-}
+//   // View balance and transaction history
+//   account.viewBalance();
+//   account.viewHistory();
+// } catch (error) {
+//   console.error(error.message);
+// }
 
 module.exports = Account;

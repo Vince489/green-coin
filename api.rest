@@ -1,4 +1,4 @@
-POST http://localhost:3000/generate-keypair
+GET http://localhost:3000/view-balance/EFxUfYTLrFui9hz9Gx26jVSf45J7Y3dVj6y2T37Nj682
 
 
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "message": "message",
-  "privateKey": "2MTVVsxHJeUGH6ZjBPx5e6TFE2n1fXCFGsGm3YJmQ14hRCkBbg4PD4FGJ9Tds3sV8DauqrcD3QG6tvDcn4UG1EXX"
+  "privateKey": "4CkvZhxpoCKFmXShGg5MEgmZBgxmTn3qKQ37iubp2xgaU9DxwfXKK17TpTmD2tNWf7rP2xdpv5QTb1Z22jtfHVs3"
 }
 
 ###
@@ -29,31 +29,29 @@ Content-Type: application/json
   "publicKey": "9pyjdGYKhP3pFikhrENq9FXZft38bG3durcnML1V9njw"
 }
 
+
+
 ###
-POST http://localhost:3000/encrypt-private-key
+POST http://localhost:3000/create-account
 Content-Type: application/json
 
 {
-  "privateKey": "2MTVVsxHJeUGH6ZjBPx5e6TFE2n1fXCFGsGm3YJmQ14hRCkBbg4PD4FGJ9Tds3sV8DauqrcD3QG6tvDcn4UG1EXX",
-  "password": "bob"
-}
-
-###
-POST http://localhost:3000/decrypt-private-key
-Content-Type: application/json
-
-{
-  "encryptedPrivateKey": {
-    "iv": [
-      131, 196, 67, 230, 243, 65, 231, 36, 213, 166, 189, 200
-    ],
-    "salt": [
-      181, 199, 235, 228, 88, 143, 53, 220, 134, 231, 199, 216, 169, 94, 123, 39
-    ],
-    "encryptedData": [
-      20, 137, 203, 216, 118, 168, 206, 220, 238, 12, 146, 251, 249, 16, 204, 57, 136, 238, 112, 23, 225, 44, 42, 204, 22, 24, 232, 115, 255, 241, 69, 191, 52, 176, 194, 87, 173, 69, 10, 183, 122, 112, 25, 212, 186, 57, 225, 171, 190, 179, 213, 36, 0, 48, 200, 125, 182, 220, 245, 73, 210, 162, 26, 222, 59, 161, 119, 140, 220, 67, 5, 87, 93, 178, 68, 243, 14, 162, 204, 246
-    ]
+  "keypair": {
+    "publicKey": "EFxUfYTLrFui9hz9Gx26jVSf45J7Y3dVj6y2T37Nj682",
+    "privateKey": "2QhFa2Eh9XrN322Y5tJRbZeGJkA6pEq6auXf7Uhs9c5Hp6UosdmmsMDcKWKsKQ5pUU1y3RJraAuQMCnxPtBjXvH8"
   },
-  "password": "bob"
+  "initialBalance": 1000
 }
+
+###
+//Transfer
+POST http://localhost:3000/transfer
+Content-Type: application/json
+
+{
+  "senderPublicKey": "3TtoDJxVc1nBvebboEgcGffQnJyVGXd4JsvHZr9YnVkw",
+  "receiverPublicKey": "EFxUfYTLrFui9hz9Gx26jVSf45J7Y3dVj6y2T37Nj682",
+  "amount": 100
+}
+
 
