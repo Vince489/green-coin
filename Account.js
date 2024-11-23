@@ -1,5 +1,6 @@
 const Keypair = require('./Keypair');
 const Transaction = require('./Transaction');
+const TransactionHistory = require('./TransactionHistory');
 
 class Account {
   constructor(publicKey, privateKey, initialBalance) {

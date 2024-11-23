@@ -3,11 +3,15 @@ GET http://localhost:3000/view-balance/EFxUfYTLrFui9hz9Gx26jVSf45J7Y3dVj6y2T37Nj
 
 
 ###
-POST http://localhost:3000/from-seed
+POST http://localhost:3000/create-account
 Content-Type: application/json
 
 {
-  "seedPhrase": "sun belt follow three genuine clown mandate grab pluck office another decorate"
+  "keypair": {
+    "publicKey": "9pyjdGYKhP3pFikhrENq9FXZft38bG3durcnML1V9njw",
+    "privateKey": "4CkvZhxpoCKFmXShGg5MEgmZBgxmTn3qKQ37iubp2xgaU9DxwfXKK17TpTmD2tNWf7rP2xdpv5QTb1Z22jtfHVs3"
+  },
+  "initialBalance": 1000
 }
 
 ###
